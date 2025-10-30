@@ -53,3 +53,4 @@ backend/.git
 *.tar
 *.zip
 .env
+node_modules
