@@ -1,17 +1,16 @@
 import Task from "../models/task.model.js"
 import User from "../models/user.model.js"
 
-// ✅ Get all tasks for a user
 export const getAllTasks = async (req, res) => {
   try {
     const userId = req.userId
     const user = await User.findById(userId)
     if (!user) return res.status(404).json({ message: "User not found" })
 
-    // tasks created by the user
+    
     const createdTasks = await Task.find({ owner: userId })
 
-    // tasks assigned to the user's email
+   
     const assignedTasks = await Task.find({ assignedTo: user.email })
 
     res.status(200).json({
@@ -25,7 +24,6 @@ export const getAllTasks = async (req, res) => {
   }
 }
 
-// ✅ Create new task
 export const createTask = async (req, res) => {
   try {
     const userId = req.userId
@@ -34,7 +32,7 @@ export const createTask = async (req, res) => {
     if (!title || !description || !dueDate)
       return res.status(400).json({ message: "All fields are required" })
 
-    // optional: check if assigned email exists
+    
     let assignedUser = null
     if (assignedTo) {
       assignedUser = await User.findOne({ email: assignedTo })
@@ -58,7 +56,7 @@ export const createTask = async (req, res) => {
   }
 }
 
-// ✅ Get specific task by ID
+
 export const getSpecificTask = async (req, res) => {
   try {
     const taskId = req.params.id
@@ -72,7 +70,7 @@ export const getSpecificTask = async (req, res) => {
   }
 }
 
-// ✅ Edit/Update a task
+
 export const editTask = async (req, res) => {
   try {
     const taskId = req.params.id
@@ -94,7 +92,7 @@ export const editTask = async (req, res) => {
   }
 }
 
-// ✅ Delete a task
+
 export const deleteTask = async (req, res) => {
   try {
     const taskId = req.params.id
