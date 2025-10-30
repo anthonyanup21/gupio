@@ -12,7 +12,7 @@ export const generateJWTAndSetCookie=(res,id)=>{
         //set cookie
         res.cookie("jwt",token,{
             httpOnly:true,//  prevents xss attack
-            secure:false, // only sent over HTTPS (set false for localhost)
+            secure:false, 
             maxAge:7*24*60*60*1000 //7days in miliseconds
         })
         
